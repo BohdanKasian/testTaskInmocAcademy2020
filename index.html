@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>MOC Academy</title>
+
+    <link rel="canonical" href="#" />
+    <meta name="description" content="Website example" />
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <form id="textInPageForm" style="display: flex">
+      <input id="inputTextChange" type="text" value="" style="margin-right: 20px; color: green" />
+      <button id="btnSubmit" type="submit" disabled >Push Text</button>
+    </form>
+
+    <h1 id="textField" style="display: flex; justify-content: center"></h1>
+    <script>
+      function loadFunc() {
+        const form = document.getElementById("textInPageForm");
+        const input = document.getElementById("inputTextChange");
+        const btn = document.getElementById("btnSubmit");
+        const textField = document.getElementById("textField");
+        let stateActive = true;
+        const regex = /^[A-Za-z0-9 ]+$/ ;
+
+        const inputChange = () => {
+          const lengthInput = input.value.length < 3
+
+          stateActive = lengthInput || !regex.test(input.value);
+          input.style.color = stateActive ? "red" : "green"
+          btn.disabled = stateActive
+        };
+
+        const onSubmitEv = (e) => {
+          e.preventDefault()
+          if (!stateActive) {
+            textField.innerHTML = `${input.value} MOC ACADEMY &#x1f601`;
+            input.value = ""
+
+            inputChange()
+          }
+        };
+        input.addEventListener("input", inputChange);
+        form.addEventListener("submit", onSubmitEv);
+      }
+      window.addEventListener("DOMContentLoaded", loadFunc);
+    </script>
+  </body>
+
+</html>
